@@ -9,7 +9,7 @@ namespace Application.Commands.Create
 {
     public class CreateService
     {
-        public record CreateServiceCommand(string name, string description, string icon, List<string> locations) : IRequest;
+        public record CreateServiceCommand(string name, string description, string icon, List<string> locations, decimal price) : IRequest;
 
         public class Handler(IServiceRepository serviceRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreateServiceCommand>
         {
@@ -21,7 +21,7 @@ namespace Application.Commands.Create
                     throw new DuplicateDataException("Service Already Exist");
                 }
 
-                var newService = new Service(request.name, request.description, request.icon, request.locations);
+                var newService = new Service(request.name, request.description, request.icon, request.locations, request.price);
                 await serviceRepository.CreateServiceAsync(newService);
                 await unitOfWork.Save();
             }

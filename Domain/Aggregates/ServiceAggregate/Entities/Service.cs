@@ -8,6 +8,7 @@ namespace Domain.Aggregates.ServiceBookingAggregate.Entities
         public string Name { get; private set; } = default!;
         public string Description { get; private set; } = default!;
         public string Icon { get; private set; } = default!;
+        public decimal Price { get; private set; } = default!
         public List<string> Locations { get; private set; }
         public virtual  ICollection<ServiceCategory> _services { get; set; } = new List<ServiceCategory>();
         public readonly List<ServiceProvider> _serviceProviders = new();
@@ -18,12 +19,13 @@ namespace Domain.Aggregates.ServiceBookingAggregate.Entities
 
         public Service() { }
 
-        public Service(string name, string description, string icon, List<string> locations)
+        public Service(string name, string description, string icon, List<string> locations, decimal price)
         {
             Name = name;
             Description = description;
             Icon = icon;
             Locations = locations;
+            Price = price;
         }
 
         public void AddServiceCategory(ServiceCategory serviceCategory)
@@ -31,12 +33,12 @@ namespace Domain.Aggregates.ServiceBookingAggregate.Entities
             _services.Add(serviceCategory);
         }
 
-        public void UpdateService(string name, string description, string icon)
+        public void UpdateService(string name, string description, string icon, decimal price)
         {
             Name = name ?? Name;
-            Description = description
-                ?? Description;
+            Description = description ?? Description;
             Icon = icon ?? Icon;
+            Price = price == 0 ? Price : price;
         }
 
         public void DeleteService(Guid ServiceId)

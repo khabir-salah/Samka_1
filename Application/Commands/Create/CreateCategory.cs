@@ -11,7 +11,7 @@ namespace Application.Commands
 {
     public class CreateCategory
     {
-        public record CreatCategoryCommand(Guid serviceId, string name, string description, decimal price, DateTime avgDuration, List<string> serviceCategoryQuestion) : IRequest;
+        public record CreatCategoryCommand(Guid serviceId, string name, string description, DateTime avgDuration, List<string> serviceCategoryQuestion) : IRequest;
 
         public class Handler(IServiceRepository serviceRepository, IUnitOfWork unitOfWork) : IRequestHandler<CreatCategoryCommand>
         {
@@ -24,7 +24,7 @@ namespace Application.Commands
                 }
 
                 var categoryQuestion = new ServiceQuestion( request.serviceCategoryQuestion);
-                var newServiceCategory = new ServiceCategory(request.serviceId, request.name, request.description, request.price, request.avgDuration, categoryQuestion); ;
+                var newServiceCategory = new ServiceCategory(request.serviceId, request.name, request.description, request.avgDuration, categoryQuestion); ;
                 newServiceCategory.AddCategory(newServiceCategory);
                 await unitOfWork.Save();
             }

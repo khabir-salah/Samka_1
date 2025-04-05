@@ -9,7 +9,6 @@ namespace Domain.Aggregates.ServiceAggregate.Entities
         public Guid ServiceId { get; private set; } = default!;
         public string Name { get; private set; } = default!;
         public string Description { get; private set; } = default!;
-        public decimal Price { get; private set; }
         public DateTime AvgDuration { get; private set; }
         public ServiceQuestion ServiceQuestion { get; private set; }
         public List<ServiceProvider> ServiceProvider { get; private set; }
@@ -18,21 +17,19 @@ namespace Domain.Aggregates.ServiceAggregate.Entities
 
         public ServiceCategory() { }
 
-        public ServiceCategory(Guid serviceId, string name, string description, decimal price, DateTime avgDuration, ServiceQuestion serviceQuestion)
+        public ServiceCategory(Guid serviceId, string name, string description, DateTime avgDuration, ServiceQuestion serviceQuestion)
         {
             ServiceId = serviceId;
             Name = name;
             Description = description;
-            Price = price;
             AvgDuration = avgDuration;
             ServiceQuestion = serviceQuestion;
         }
 
-        public void UpdateService(string name, string description, decimal price, DateTime avgDuration, ServiceQuestion serviceQuestion)
+        public void UpdateServiceCategory(string name, string description, decimal price, DateTime avgDuration, ServiceQuestion serviceQuestion)
         {
             Name = name ?? Name;
             Description = description ?? Description;
-            Price = price;
             AvgDuration = avgDuration;
             ServiceQuestion = serviceQuestion;
         }
